@@ -1,6 +1,6 @@
 package br.com.bulvee.printer;
 
-public interface LogPrinter {
+public interface LogOutput {
 
     void print(String message);
 }

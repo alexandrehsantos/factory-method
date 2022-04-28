@@ -1,6 +1,6 @@
 package br.com.bulvee.logger;
 
-import br.com.bulvee.printer.LogPrinter;
+import br.com.bulvee.printer.LogOutput;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,15 +10,15 @@ public abstract class Logger {
     public static final String SPACE_SEPARATOR = " ";
     public static final String DASH = "-";
 
-    protected abstract LogPrinter createLogger();
+    protected abstract LogOutput createLogger();
 
     private static final String DEBUG = "DEBUG";
-    private static final String INFO = "DEBUG";
-    private static final String WARN = "DEBUG";
-    private static final String ERROR = "DEBUG";
-    private static final String FATAL = "DEBUG";
-    private static final String TRACE = "DEBUG";
-    private static final String OFF = "DEBUG";
+    private static final String INFO = "INFO";
+    private static final String WARN = "WARN";
+    private static final String ERROR = "ERROR";
+    private static final String FATAL = "FATAL";
+    private static final String TRACE = "TRACE";
+    private static final String OFF = "OFF";
 
     public void debug(String message){this.log(this.DEBUG  + SPACE_SEPARATOR + message);};
     public void info(String message){this.log(this.INFO  + SPACE_SEPARATOR + message);};
