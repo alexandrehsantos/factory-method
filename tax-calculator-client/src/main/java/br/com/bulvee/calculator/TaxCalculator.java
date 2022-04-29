@@ -19,7 +19,7 @@ public class TaxCalculator {
 
         double tax = random.nextDouble();
 
-        logger.info("Tax calculated for the value $ " + value);
+        logger.info("Tax " + tax + " calculated for the value $ " + value);
     }
 
 }

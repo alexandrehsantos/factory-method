@@ -32,15 +32,13 @@ public abstract class Logger {
         StringBuilder logMesssage = new StringBuilder();
 
         logMesssage.append(LocalTime.now());
-        logMesssage.append(SPACE_SEPARATOR);
-        logMesssage.append(SPACE_SEPARATOR);
+        logMesssage.append(DASH);
         logMesssage.append(LocalDate.now());
         logMesssage.append(SPACE_SEPARATOR);
         logMesssage.append(DASH);
         logMesssage.append(SPACE_SEPARATOR);
         logMesssage.append(message);
-        System.out.println(logMesssage.toString());
 
-        this.createLogger().print(message);
+        this.createLogger().print(logMesssage.toString());
     }
 }
