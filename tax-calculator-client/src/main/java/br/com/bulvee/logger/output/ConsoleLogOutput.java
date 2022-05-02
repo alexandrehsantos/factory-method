@@ -1,4 +1,4 @@
-package br.com.bulvee.logger;
+package br.com.bulvee.logger.output;
 
 import br.com.bulvee.printer.LogOutput;
 

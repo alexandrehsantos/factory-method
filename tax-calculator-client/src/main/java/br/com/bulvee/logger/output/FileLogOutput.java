@@ -1,4 +1,4 @@
-package br.com.bulvee.logger;
+package br.com.bulvee.logger.output;
 
 import br.com.bulvee.printer.LogOutput;
 
@@ -10,6 +10,8 @@ import java.time.LocalDate;
 
 public class FileLogOutput implements LogOutput {
 
+    public static final String NAME_SEPARATOR = "-";
+    public static final String DEFAULT_EXTENSION = ".log";
     private String logName;
     private boolean newFile;
 
@@ -24,16 +26,7 @@ public class FileLogOutput implements LogOutput {
 
         StringBuilder fileName = buildFilename();
 
-        File file = new File(applicationPath + fileName.toString());
-        newFile = isNewFile(file);
-
-        if (newFile) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Is not possible create the new file log. See the error on creation: " + e.toString());
-            }
-        }
+        File file = fileCreator(applicationPath, fileName);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
             if (newFile) {
@@ -46,24 +39,34 @@ public class FileLogOutput implements LogOutput {
         } catch (IOException e) {
             System.out.println("It's not possible to write in te file log see the error: " + e.toString());
         }
+    }
 
+    private File fileCreator(String applicationPath, StringBuilder fileName) {
+        File file = new File(applicationPath + fileName.toString());
+        isNewFile(file);
+        if (newFile) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Is not possible create the new file log. See the error on creation: " + e.toString());
+            }
+        }
+        return file;
     }
 
     private StringBuilder buildFilename() {
-        String nameSeparator = "-";
-        String defaultExtension = ".log";
 
         LocalDate date = LocalDate.now();
 
         StringBuilder fileName = new StringBuilder();
         fileName.append(date);
-        fileName.append(nameSeparator);
+        fileName.append(NAME_SEPARATOR);
         fileName.append(logName);
-        fileName.append(defaultExtension);
+        fileName.append(DEFAULT_EXTENSION);
         return fileName;
     }
 
-    private boolean isNewFile(File file) {
-        return !file.exists();
+    private void isNewFile(File file) {
+        newFile = !file.exists();
     }
 }
